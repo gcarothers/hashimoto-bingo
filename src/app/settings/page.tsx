@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  Box, 
-  Typography, 
-  Button, 
+import {
+  Box,
+  Typography,
+  Button,
   Paper,
   Alert,
   Snackbar,
@@ -14,7 +14,7 @@ import {
   DialogActions,
   DialogContentText,
 } from '@mui/material';
-import { exportData, importData } from '@/lib/db';
+import { exportData, importData, deleteAllData } from '@/lib/db';
 import { SymptomEntry } from '@/types';
 
 export default function Settings() {
@@ -37,7 +37,7 @@ export default function Settings() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      
+
       setNotification({
         message: 'Data exported successfully',
         severity: 'success'
@@ -49,6 +49,14 @@ export default function Settings() {
         severity: 'error'
       });
     }
+  };
+
+  const handleDelete = async () => {
+    await deleteAllData();
+    setNotification({
+      message: 'All data deleted successfully',
+      severity: 'success'
+    });
   };
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +108,7 @@ export default function Settings() {
 
       <Paper sx={{ p: 3 }}>
         <Typography variant="h6" sx={{ mb: 2 }}>Data Management</Typography>
-        
+
         <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
           <Button
             variant="contained"
@@ -121,6 +129,8 @@ export default function Settings() {
               onChange={handleFileSelect}
             />
           </Button>
+
+          <Button variant="contained" onClick={handleDelete} color="warning">Delete All Data</Button>
         </Box>
 
         <Typography variant="body2" color="text.secondary">
@@ -156,8 +166,8 @@ export default function Settings() {
         onClose={() => setNotification(null)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert 
-          onClose={() => setNotification(null)} 
+        <Alert
+          onClose={() => setNotification(null)}
           severity={notification?.severity}
           sx={{ width: '100%' }}
         >

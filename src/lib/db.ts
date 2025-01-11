@@ -57,4 +57,9 @@ export async function importData(data: { symptomEntries: SymptomEntry[] }, repla
   }
   
   await tx.done;
-} 
+}
+
+export async function deleteAllData() {
+  const db = await initDB();
+  await db.clear(STORE_NAME);
+}
