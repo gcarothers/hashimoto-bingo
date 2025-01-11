@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';``
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { 
+import {
   Box,
   Typography,
   Button,
@@ -85,9 +85,9 @@ export default function AddEntry() {
 
       <Grid container spacing={2}>
         {SYMPTOMS.map(symptom => (
-          <Grid size={{xs:12, sm:6, md:4, lg:3}} key={symptom.id}>
-            <Card 
-              sx={{ 
+          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={symptom.id}>
+            <Card
+              sx={{
                 cursor: 'pointer',
                 bgcolor: selectedSymptoms[symptom.id] ? 'primary.light' : 'background.paper'
               }}

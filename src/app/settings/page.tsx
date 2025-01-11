@@ -72,7 +72,7 @@ export default function Settings() {
       }
 
       // Type check each entry
-      data.symptomEntries.forEach((entry: any) => {
+      data.symptomEntries.forEach((entry: Partial<SymptomEntry>) => {
         if (!entry.id || !entry.timestamp || typeof entry.symptoms !== 'object') {
           throw new Error('Invalid entry format');
         }
