@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getEntries } from "@/lib/db";
+import { Box, Typography } from "@mui/material";
 import { SymptomEntry } from "@/types";
 import Calendar from "@/components/Calendar";
 
@@ -23,11 +24,11 @@ export default function Home() {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Symptom Calendar</h2>
-      </div>
+    <Box>
+      <Typography variant="h2" mb={1}>
+        Overview of Symptoms
+      </Typography>
       <Calendar entries={entries} />
-    </div>
+    </Box>
   );
 }
