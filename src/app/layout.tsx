@@ -1,6 +1,7 @@
 'use client';
 
 import { AppBar, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import Link from 'next/link';
 const theme = createTheme({
   palette: {
@@ -45,6 +46,7 @@ export default function RootLayout({
             {children}
           </main>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
