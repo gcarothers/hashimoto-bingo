@@ -11,8 +11,9 @@ import {
   ListItemText,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { ChevronLeft, ChevronRight, Edit as EditIcon } from "@mui/icons-material";
 import { SymptomEntry } from "@/types";
+import Link from "next/link";
 
 interface CalendarProps {
   entries: SymptomEntry[];
@@ -161,7 +162,16 @@ export default function Calendar({ entries }: CalendarProps) {
             {days
               .find((day) => day.date.getTime() === selectedDate.getTime())
               ?.entries.map((entry, index) => (
-                <ListItem key={index}>
+                <ListItem
+                  key={index}
+                  secondaryAction={
+                    <Link href={`/${entry.id}/edit`} passHref>
+                      <IconButton edge="end" aria-label="edit">
+                        <EditIcon />
+                      </IconButton>
+                    </Link>
+                  }
+                >
                   <ListItemText
                     primary={new Date(entry.timestamp).toLocaleTimeString()}
                     secondary={Object.entries(entry.symptoms)

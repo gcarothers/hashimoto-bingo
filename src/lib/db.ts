@@ -110,3 +110,13 @@ export async function generateSampleMonth(baseDate = new Date()) {
   await importData({ symptomEntries: entries }, true);
   return entries;
 }
+
+export async function getEntry(id: string) {
+  const db = await initDB();
+  return db.get(STORE_NAME, id);
+}
+
+export async function updateEntry(entry: SymptomEntry) {
+  const db = await initDB();
+  return db.put(STORE_NAME, entry);
+}
