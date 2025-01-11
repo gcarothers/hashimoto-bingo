@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { 
-  Paper, 
-  Typography, 
+import { useState } from "react";
+import {
+  Paper,
+  Typography,
   IconButton,
   Box,
   List,
   ListItem,
   ListItemText,
-} from '@mui/material';
-import Grid from '@mui/material/Grid2';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import { SymptomEntry } from '@/types';
+} from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { SymptomEntry } from "@/types";
 
 interface CalendarProps {
   entries: SymptomEntry[];
@@ -61,17 +61,17 @@ export default function Calendar({ entries }: CalendarProps) {
 
   const days = getDaysInMonth(
     currentDate.getFullYear(),
-    currentDate.getMonth()
+    currentDate.getMonth(),
   );
 
   // Group entries by date
-  entries.forEach(entry => {
+  entries.forEach((entry) => {
     const entryDate = new Date(entry.timestamp);
     const dayEntry = days.find(
-      day =>
+      (day) =>
         day.date.getDate() === entryDate.getDate() &&
         day.date.getMonth() === entryDate.getMonth() &&
-        day.date.getFullYear() === entryDate.getFullYear()
+        day.date.getFullYear() === entryDate.getFullYear(),
     );
     if (dayEntry) {
       dayEntry.entries.push(entry);
@@ -79,18 +79,32 @@ export default function Calendar({ entries }: CalendarProps) {
   });
 
   const previousMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1),
+    );
   };
 
   const nextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1),
+    );
   };
 
   return (
     <Paper elevation={2} sx={{ p: 2 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 2,
+        }}
+      >
         <Typography variant="h6">
-          {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+          {currentDate.toLocaleString("default", {
+            month: "long",
+            year: "numeric",
+          })}
         </Typography>
         <Box>
           <IconButton onClick={previousMonth}>
@@ -103,26 +117,27 @@ export default function Calendar({ entries }: CalendarProps) {
       </Box>
 
       <Grid container spacing={1}>
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-          <Grid key={day} size={12/7}>
+        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+          <Grid key={day} size={12 / 7}>
             <Typography align="center" variant="subtitle2">
               {day}
             </Typography>
           </Grid>
         ))}
         {days.map((day, index) => (
-          <Grid key={index} size={12/7}>
+          <Grid key={index} size={12 / 7}>
             <Paper
               elevation={0}
               sx={{
                 p: 1,
                 minHeight: 80,
-                bgcolor: day.entries.length > 0 ? 'primary.light' : 'background.paper',
+                bgcolor:
+                  day.entries.length > 0 ? "primary.light" : "background.paper",
                 opacity: day.isCurrentMonth ? 1 : 0.5,
-                cursor: 'pointer',
-                '&:hover': {
-                  bgcolor: 'action.hover',
-                }
+                cursor: "pointer",
+                "&:hover": {
+                  bgcolor: "action.hover",
+                },
               }}
               onClick={() => setSelectedDate(day.date)}
             >
@@ -138,13 +153,13 @@ export default function Calendar({ entries }: CalendarProps) {
       </Grid>
 
       {selectedDate && (
-        <Box sx={{ mt: 2, pt: 2, borderTop: 1, borderColor: 'divider' }}>
+        <Box sx={{ mt: 2, pt: 2, borderTop: 1, borderColor: "divider" }}>
           <Typography variant="h6">
             {selectedDate.toLocaleDateString()}
           </Typography>
           <List>
             {days
-              .find(day => day.date.getTime() === selectedDate.getTime())
+              .find((day) => day.date.getTime() === selectedDate.getTime())
               ?.entries.map((entry, index) => (
                 <ListItem key={index}>
                   <ListItemText
@@ -152,7 +167,7 @@ export default function Calendar({ entries }: CalendarProps) {
                     secondary={Object.entries(entry.symptoms)
                       .filter(([_, value]) => value)
                       .map(([key]) => key)
-                      .join(', ')}
+                      .join(", ")}
                   />
                 </ListItem>
               ))}
@@ -161,4 +176,4 @@ export default function Calendar({ entries }: CalendarProps) {
       )}
     </Paper>
   );
-} 
+}

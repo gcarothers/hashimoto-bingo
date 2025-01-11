@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Box,
   Typography,
@@ -9,25 +9,25 @@ import {
   TextField,
   Slider,
   Card,
-  CardContent
-} from '@mui/material';
-import Grid from '@mui/material/Grid2';
-import { SYMPTOMS } from '@/types';
-import { addEntry } from '@/lib/db';
+  CardContent,
+} from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { SYMPTOMS } from "@/types";
+import { addEntry } from "@/lib/db";
 
 export default function AddEntry() {
   const router = useRouter();
   const [selectedSymptoms, setSelectedSymptoms] = useState<{
     [key: string]: number | boolean;
   }>({});
-  const [notes, setNotes] = useState('');
+  const [notes, setNotes] = useState("");
   const [saving, setSaving] = useState(false);
 
   const handleSymptomToggle = (symptomId: string, hasSeverity: boolean) => {
-    setSelectedSymptoms(prev => {
+    setSelectedSymptoms((prev) => {
       if (hasSeverity) {
         // If it's already selected with a severity, remove it
-        if (typeof prev[symptomId] === 'number') {
+        if (typeof prev[symptomId] === "number") {
           const { [symptomId]: _, ...rest } = prev;
           return rest;
         }
@@ -44,7 +44,7 @@ export default function AddEntry() {
   };
 
   const handleSeverityChange = (symptomId: string, severity: number) => {
-    setSelectedSymptoms(prev => ({
+    setSelectedSymptoms((prev) => ({
       ...prev,
       [symptomId]: severity,
     }));
@@ -62,36 +62,46 @@ export default function AddEntry() {
         notes: notes.trim() || undefined,
       });
 
-      router.push('/');
+      router.push("/");
     } catch (error) {
-      console.error('Failed to save entry:', error);
-      alert('Failed to save entry. Please try again.');
+      console.error("Failed to save entry:", error);
+      alert("Failed to save entry. Please try again.");
       setSaving(false);
     }
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{ display: "flex", flexDirection: "column", gap: 3 }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h4">Record a Symptom Bingo Card</Typography>
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={saving}
-        >
-          {saving ? 'Saving...' : 'Save Card'}
+        <Button type="submit" variant="contained" disabled={saving}>
+          {saving ? "Saving..." : "Save Card"}
         </Button>
       </Box>
 
       <Grid container spacing={2}>
-        {SYMPTOMS.map(symptom => (
+        {SYMPTOMS.map((symptom) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={symptom.id}>
             <Card
               sx={{
-                cursor: 'pointer',
-                bgcolor: selectedSymptoms[symptom.id] ? 'primary.light' : 'background.paper'
+                cursor: "pointer",
+                bgcolor: selectedSymptoms[symptom.id]
+                  ? "primary.light"
+                  : "background.paper",
               }}
-              onClick={() => handleSymptomToggle(symptom.id, symptom.hasSeverity)}
+              onClick={() =>
+                handleSymptomToggle(symptom.id, symptom.hasSeverity)
+              }
             >
               <CardContent>
                 <Typography>{symptom.label}</Typography>
@@ -100,8 +110,10 @@ export default function AddEntry() {
                     min={1}
                     max={5}
                     value={selectedSymptoms[symptom.id] as number}
-                    onChange={(_, value) => handleSeverityChange(symptom.id, value as number)}
-                    onClick={e => e.stopPropagation()}
+                    onChange={(_, value) =>
+                      handleSeverityChange(symptom.id, value as number)
+                    }
+                    onClick={(e) => e.stopPropagation()}
                     sx={{ mt: 2 }}
                   />
                 )}
@@ -116,10 +128,10 @@ export default function AddEntry() {
         multiline
         rows={4}
         value={notes}
-        onChange={e => setNotes(e.target.value)}
+        onChange={(e) => setNotes(e.target.value)}
         placeholder="Add any additional notes here..."
         fullWidth
       />
     </Box>
   );
-} 
+}

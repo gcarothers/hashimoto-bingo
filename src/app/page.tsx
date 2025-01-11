@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { getEntries } from '@/lib/db';
-import { SymptomEntry } from '@/types';
-import Calendar from '@/components/Calendar';
+import { useEffect, useState } from "react";
+import { getEntries } from "@/lib/db";
+import { SymptomEntry } from "@/types";
+import Calendar from "@/components/Calendar";
 
 export default function Home() {
   const [entries, setEntries] = useState<SymptomEntry[]>([]);

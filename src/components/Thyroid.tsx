@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ThyroidProps {
   width?: number;
@@ -6,21 +6,21 @@ interface ThyroidProps {
   fill?: string;
 }
 
-const Thyroid: React.FC<ThyroidProps> = ({ 
-  width = 75, 
-  height = 75, 
-  fill = '#FDA4AF' 
+const Thyroid: React.FC<ThyroidProps> = ({
+  width = 75,
+  height = 75,
+  fill = "#FDA4AF",
 }) => {
   return (
-    <svg 
-      width={width} 
-      height={height} 
-      viewBox="0 0 100 100" 
-      fill="none" 
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 100 100"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-  <path 
-    d="
+      <path
+        d="
       M 50,30
       C 40,20  25,25  20,40
       C 15,55  25,80  35,85
@@ -31,11 +31,11 @@ const Thyroid: React.FC<ThyroidProps> = ({
       C 75,25  60,20  50,30
       Z
     "
-    fill={fill}
-    stroke="none"
-  />
+        fill={fill}
+        stroke="none"
+      />
     </svg>
   );
 };
 
-export default Thyroid; 
+export default Thyroid;
