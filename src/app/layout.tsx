@@ -2,6 +2,7 @@
 
 import { AppBar, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Thyroid from '@/components/Thyroid';
 import Link from 'next/link';
 const theme = createTheme({
   palette: {
@@ -33,7 +34,10 @@ export default function RootLayout({
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}>
-                <h1 style={{ margin: 0 }}>Hashimoto&apos;s Bingo</h1>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <Thyroid />
+                  <h1 style={{ margin: 0 }}>Hashimoto&apos;s Bingo</h1>
+                </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <Link href="/" style={{ color: 'white', textDecoration: 'none' }}>Overview</Link>
                   <Link href="/add" style={{ color: 'white', textDecoration: 'none' }}>Play Bingo</Link>
