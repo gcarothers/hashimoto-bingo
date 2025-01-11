@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 
-import { Card, CardContent, Typography, Slider, TextField } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Slider,
+  TextField,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { SYMPTOMS, SymptomEntry } from "@/types";
 
@@ -14,6 +20,22 @@ const BingoCard: React.FC<BingoCardProps> = ({ entry, setEntry }) => {
     [key: string]: number | boolean;
   }>(entry.symptoms || {});
   const [notes, setNotes] = useState(entry.notes || "");
+
+  const timestamp = useMemo(() => {
+    return entry.timestamp || new Date().toISOString();
+  }, [entry.timestamp]);
+  const id = useMemo(() => {
+    return entry.id || "";
+  }, [entry.id]);
+
+  useEffect(() => {
+    setEntry({
+      id: id,
+      timestamp: timestamp,
+      symptoms: selectedSymptoms,
+      notes: notes,
+    });
+  }, [setEntry, id, timestamp, notes, selectedSymptoms]);
 
   const handleSymptomToggle = (symptomId: string, hasSeverity: boolean) => {
     setSelectedSymptoms((prev) => {
@@ -33,7 +55,6 @@ const BingoCard: React.FC<BingoCardProps> = ({ entry, setEntry }) => {
       }
       return { ...prev, [symptomId]: true };
     });
-    setEntry({ ...entry, symptoms: selectedSymptoms });
   };
 
   const handleSeverityChange = (symptomId: string, severity: number) => {
@@ -41,7 +62,6 @@ const BingoCard: React.FC<BingoCardProps> = ({ entry, setEntry }) => {
       ...prev,
       [symptomId]: severity,
     }));
-    setEntry({ ...entry, symptoms: selectedSymptoms });
   };
 
   return (
@@ -79,7 +99,6 @@ const BingoCard: React.FC<BingoCardProps> = ({ entry, setEntry }) => {
           </Grid>
         ))}
       </Grid>
-
       <TextField
         label="Notes"
         multiline
@@ -88,7 +107,8 @@ const BingoCard: React.FC<BingoCardProps> = ({ entry, setEntry }) => {
         onChange={(e) => setNotes(e.target.value)}
         placeholder="Add any additional notes here..."
         fullWidth
-      />  </>
+      />{" "}
+    </>
   );
 };
 

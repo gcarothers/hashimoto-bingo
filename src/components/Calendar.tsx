@@ -11,7 +11,11 @@ import {
   ListItemText,
 } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { ChevronLeft, ChevronRight, Edit as EditIcon } from "@mui/icons-material";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Edit as EditIcon,
+} from "@mui/icons-material";
 import { SymptomEntry } from "@/types";
 import Link from "next/link";
 

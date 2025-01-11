@@ -2,12 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
-import {
-  Box,
-  Typography,
-  Button,
-  CircularProgress,
-} from "@mui/material";
+import { Box, Typography, Button, CircularProgress } from "@mui/material";
 import { SymptomEntry } from "@/types";
 import { getEntry, updateEntry } from "@/lib/db";
 import BingoCard from "@/components/BingoCard";
