@@ -33,9 +33,9 @@ export default function RootLayout({
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}>
-                <h1 style={{ margin: 0 }}>Hashimoto Bingo</h1>
+                <h1 style={{ margin: 0 }}>Hashimoto&apos;s Bingo</h1>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                  <Link href="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>
+                  <Link href="/" style={{ color: 'white', textDecoration: 'none' }}>Overview</Link>
                   <Link href="/add" style={{ color: 'white', textDecoration: 'none' }}>Play Bingo</Link>
                   <Link href="/settings" style={{ color: 'white', textDecoration: 'none' }}>Settings</Link>
                 </div>

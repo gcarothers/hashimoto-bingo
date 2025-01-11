@@ -73,13 +73,13 @@ export default function AddEntry() {
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h4">Add New Entry</Typography>
+        <Typography variant="h4">Record a Symptom Bingo Card</Typography>
         <Button
           type="submit"
           variant="contained"
           disabled={saving}
         >
-          {saving ? 'Saving...' : 'Save Entry'}
+          {saving ? 'Saving...' : 'Save Card'}
         </Button>
       </Box>
 
